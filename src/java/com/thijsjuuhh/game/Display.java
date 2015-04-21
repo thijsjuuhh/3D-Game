@@ -5,20 +5,30 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
+import com.thijsjuuhh.game.input.Input;
+
 public class Display implements Runnable {
 
 	private static JFrame frame;
 	private Thread thread;
 	private boolean running;
+	public static boolean moved = false;
 
 	public Display() {
 		thread = new Thread(this, Refs.getTitle());
+
+		Input i = new Input();
+		frame.addKeyListener(i);
+		frame.addMouseMotionListener(i);
+		frame.addMouseListener(i);
+		frame.addMouseWheelListener(i);
+
 	}
 
 	public static void main(String[] args) {
-		Display disp = new Display();
-
 		frame = new Window(Refs.getTitle(), Refs.getWidth(), Refs.getHeight(), true);
+
+		Display disp = new Display();
 
 		disp.start();
 	}
@@ -74,10 +84,16 @@ public class Display implements Runnable {
 		g.fillRect(0, 0, Refs.getWidth(), Refs.getHeight());
 		g.dispose();
 		bs.show();
-
 	}
 
 	private void update() {
 		Game.update();
 	}
+
+	public static void moveFrame(int x, int y) {
+		if (moved) {
+			frame.setLocation(x, y);
+		}
+	}
+
 }
