@@ -1,0 +1,9 @@
+Java
+2D/3D(fights)
+1 Player
+Monsters
+victory based game(turns)
+
+hotbar with: coins, level, science
+level with places to go
+menu's
