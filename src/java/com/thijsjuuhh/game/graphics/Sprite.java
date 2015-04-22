@@ -18,6 +18,19 @@ public class Sprite {
 		load();
 	}
 
+	public Sprite(SpriteSheet s, int w, int h, int x, int y) {
+		this.w = w;
+		this.h = h;
+		System.out.println("h set");
+		this.x = x;
+		this.y = y;
+		this.s = s;
+
+		pixels = new int[w * h];
+
+		load();
+	}
+
 	public int getWidth() {
 		return w;
 	}

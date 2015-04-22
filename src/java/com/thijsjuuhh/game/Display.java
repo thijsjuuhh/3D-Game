@@ -9,9 +9,10 @@ import javax.swing.JFrame;
 
 import com.thijsjuuhh.game.graphics.Render;
 import com.thijsjuuhh.game.input.Input;
-import com.thijsjuuhh.game.registry.Sprites;
 
 public class Display implements Runnable {
+
+	private static int monitor = 1;
 
 	private static JFrame frame;
 	private Thread thread;
@@ -38,8 +39,9 @@ public class Display implements Runnable {
 	}
 
 	public static void main(String[] args) {
+
 		Game.preInit();
-		frame = new Window(Refs.getTitle(), Refs.getWidth(), Refs.getHeight(), true);
+		frame = new Window(Refs.getTitle(), Refs.getWidth(), Refs.getHeight(), true, true, monitor);
 
 		Display disp = new Display();
 
@@ -94,7 +96,7 @@ public class Display implements Runnable {
 			return;
 		}
 
-		r.renderSprite(20, 20, Sprites.test);
+		Hotbar.render(r);
 
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = r.pixels[i];
