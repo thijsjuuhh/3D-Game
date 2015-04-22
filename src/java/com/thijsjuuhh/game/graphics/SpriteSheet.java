@@ -28,13 +28,13 @@ public class SpriteSheet {
 
 	private void load() {
 		try {
+			System.out.println(path);
 			BufferedImage i = ImageIO.read(SpriteSheet.class.getResource(path));
 			w = i.getWidth();
 			h = i.getHeight();
 			i.getRGB(0, 0, w, h, pixels, 0, w);
 
 		} catch (IOException e) {
-			System.out.println("The file " + path + " can not be found!");
 			e.printStackTrace();
 		}
 	}

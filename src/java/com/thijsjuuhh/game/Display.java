@@ -2,10 +2,14 @@ package com.thijsjuuhh.game;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import com.thijsjuuhh.game.graphics.Render;
 import com.thijsjuuhh.game.input.Input;
+import com.thijsjuuhh.game.registry.Sprites;
 
 public class Display implements Runnable {
 
@@ -14,8 +18,15 @@ public class Display implements Runnable {
 	private boolean running;
 	public static boolean moved = false;
 
+	private Render r;
+	private BufferedImage i;
+	private int[] pixels;
+
 	public Display() {
 		thread = new Thread(this, Refs.getTitle());
+
+		i = new BufferedImage(Refs.getWidth(), Refs.getHeight(), BufferedImage.TYPE_INT_RGB);
+		pixels = ((DataBufferInt) i.getRaster().getDataBuffer()).getData();
 
 		Input i = new Input();
 		frame.addKeyListener(i);
@@ -26,6 +37,7 @@ public class Display implements Runnable {
 	}
 
 	public static void main(String[] args) {
+		Game.preInit();
 		frame = new Window(Refs.getTitle(), Refs.getWidth(), Refs.getHeight(), true);
 
 		Display disp = new Display();
@@ -80,6 +92,13 @@ public class Display implements Runnable {
 			frame.createBufferStrategy(3);
 			return;
 		}
+
+		r.renderSprite(20, 20, Sprites.test);
+
+		for (int i = 0; i < pixels.length; i++) {
+			pixels[i] = r.pixels[i];
+		}
+
 		Graphics g = bs.getDrawGraphics();
 		g.fillRect(0, 0, Refs.getWidth(), Refs.getHeight());
 		g.dispose();
