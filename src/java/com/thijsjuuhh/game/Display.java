@@ -25,6 +25,7 @@ public class Display implements Runnable {
 	public Display() {
 		thread = new Thread(this, Refs.getTitle());
 
+		r = new Render(Refs.getWidth(), Refs.getHeight());
 		i = new BufferedImage(Refs.getWidth(), Refs.getHeight(), BufferedImage.TYPE_INT_RGB);
 		pixels = ((DataBufferInt) i.getRaster().getDataBuffer()).getData();
 
@@ -101,6 +102,7 @@ public class Display implements Runnable {
 
 		Graphics g = bs.getDrawGraphics();
 		g.fillRect(0, 0, Refs.getWidth(), Refs.getHeight());
+		g.drawImage(i, 0, 0, Refs.getWidth() * Refs.getScale(), Refs.getHeight() * Refs.getScale(), null);
 		g.dispose();
 		bs.show();
 	}

@@ -13,6 +13,8 @@ public class Sprite {
 		this.y = y * h;
 		this.s = s;
 
+		pixels = new int[w * h];
+
 		load();
 	}
 

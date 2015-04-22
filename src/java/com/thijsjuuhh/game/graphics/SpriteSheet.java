@@ -13,7 +13,6 @@ public class SpriteSheet {
 
 	public SpriteSheet(String p) {
 		path = p;
-		pixels = new int[w * h];
 
 		load();
 	}
@@ -32,6 +31,7 @@ public class SpriteSheet {
 			BufferedImage i = ImageIO.read(SpriteSheet.class.getResource(path));
 			w = i.getWidth();
 			h = i.getHeight();
+			pixels = new int[w * h];
 			i.getRGB(0, 0, w, h, pixels, 0, w);
 
 		} catch (IOException e) {

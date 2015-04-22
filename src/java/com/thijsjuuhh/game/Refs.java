@@ -39,4 +39,11 @@ public class Refs extends Object {
 		Refs.scale = scale;
 	}
 
+	public static int getAbsoluteWidth() {
+		return width * scale;
+	}
+
+	public static int getAbsoluteHeight() {
+		return height * scale;
+	}
 }
